@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Man Patel | Data Science Enthusiast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #050505; color: #ffffff; overflow-x: hidden; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 3px; }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee { animation: scroll 30s linear infinite; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-delay { animation: float 6s ease-in-out 2s infinite; }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        .pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+        @keyframes grow-bar {
+            from { width: 0%; }
+            to { width: var(--w); }
+        }
+        .grow-bar { animation: grow-bar 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spin-slow { animation: spin-slow 20s linear infinite; }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #3b82f6; }
+        }
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #3b82f6;
+            animation: typing 3s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+            width: 0;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #a855f7, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-text-subtle {
+            background: linear-gradient(to right, #a3a3a3, #525252, #a3a3a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Card hover */
+        .project-card {
+            transition: all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px -15px rgba(59, 130, 246, 0.15);
+        }
+        .project-card:hover .card-border {
+            opacity: 1;
+        }
+        .project-card:hover .card-image {
+            transform: scale(1.05);
+            opacity: 0.5;
+        }
+        .project-card:hover .card-overlay {
+            opacity: 0.6;
+        }
+
+        .skill-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .cert-card {
+            transition: all 0.5s ease;
+        }
+        .cert-card:hover {
+            transform: scale(1.03);
+            border-color: rgba(234, 179, 8, 0.4);
+        }
+
+        /* Nav blur */
+        .nav-blur {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        /* Glow effects */
+        .glow-blue { box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.5); }
+        .glow-purple { box-shadow: 0 0 40px -10px rgba(168, 85, 247, 0.5); }
+        .glow-fuchsia { box-shadow: 0 0 40px -10px rgba(217, 70, 239, 0.5); }
+
+        /* Section reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .mobile-menu.open {
+            max-height: 400px;
+        }
+
+        /* Logo pulse */
+        .logo-glow {
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+        }
+
+        /* Toast notification */
+        .toast {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-[#050505]/80 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="relative w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center logo-glow transition-all duration-300 group-hover:scale-110">
+                    <span class="text-white font-bold text-sm">MP</span>
+                    <div class="absolute inset-0 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-300"></div>
+                </div>
+                <span class="text-white font-medium text-sm hidden sm:block">Man Patel</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300">About</a>
+                <a href="#skills" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300">Skills</a>
+                <a href="#projects" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300">Projects</a>
+                <a href="#certifications" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300">Certifications</a>
+                <a href="#contact" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300">Contact</a>
+            </div>
+
+            <!-- CTA + Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden md:inline-flex h-10 px-6 items-center rounded-full bg-white text-black text-sm font-medium hover:bg-neutral-200 transition-colors duration-300">
+                    Download CV
+                </a>
+                <button id="mobile-toggle" class="md:hidden text-neutral-400 hover:text-white transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden border-t border-white/5">
+            <div class="px-6 py-4 flex flex-col gap-4">
+                <a href="#about" class="text-neutral-400 hover:text-white text-sm font-light transition-colors py-2" onclick="closeMobileMenu()">About</a>
+                <a href="#skills" class="text-neutral-400 hover:text-white text-sm font-light transition-colors py-2" onclick="closeMobileMenu()">Skills</a>
+                <a href="#projects" class="text-neutral-400 hover:text-white text-sm font-light transition-colors py-2" onclick="closeMobileMenu()">Projects</a>
+                <a href="#certifications" class="text-neutral-400 hover:text-white text-sm font-light transition-colors py-2" onclick="closeMobileMenu()">Certifications</a>
+                <a href="#contact" class="text-neutral-400 hover:text-white text-sm font-light transition-colors py-2" onclick="closeMobileMenu()">Contact</a>
+                <a href="#contact" class="h-10 px-6 flex items-center justify-center rounded-full bg-white text-black text-sm font-medium" onclick="closeMobileMenu()">Download CV</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="hero" class="min-h-screen pt-20 flex items-center relative overflow-hidden">
+        <!-- Background blobs -->
+        <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] animate-float pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-500/8 rounded-full blur-[100px] animate-float-delay pointer-events-none"></div>
+
+        <!-- Decorative spinning circle -->
+        <div class="absolute top-1/2 right-10 lg:right-20 -translate-y-1/2 w-64 h-64 lg:w-80 lg:h-80 pointer-events-none hidden md:block">
+            <div class="spin-slow w-full h-full rounded-full border border-white/5 relative">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-blue-500"></div>
+                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full bg-purple-500"></div>
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-fuchsia-500"></div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left content -->
+                <div class="space-y-8">
+                    <div class="animate-fade-up">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-6">
+                            <span class="w-2 h-2 rounded-full bg-green-500 relative">
+                                <span class="absolute inset-0 rounded-full bg-green-500 pulse-ring"></span>
+                            </span>
+                            <span class="text-xs font-medium text-neutral-400 uppercase tracking-wider">Available for Opportunities</span>
+                        </div>
+                    </div>
+
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-medium leading-[0.9] tracking-tight animate-fade-up delay-100">
+                        Hi, I'm<br>
+                        <span class="gradient-text">Man Patel</span>
+                    </h1>
+
+                    <div class="animate-fade-up delay-200">
+                        <p class="text-lg md:text-xl font-light text-neutral-400 leading-relaxed max-w-lg">
+                            Data Science Enthusiast &amp; B.Tech CS Student at Karnavati University, passionate about turning data into actionable insights.
+                        </p>
+                    </div>
+
+                    <div class="animate-fade-up delay-300 flex flex-wrap items-center gap-4">
+                        <a href="#projects" class="h-12 px-8 inline-flex items-center rounded-full bg-white text-black text-sm font-medium hover:bg-neutral-200 transition-colors duration-300">
+                            View Projects
+                            <i data-lucide="arrow-down-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                        <a href="#contact" class="h-12 px-8 inline-flex items-center rounded-full border border-white/10 text-sm font-medium hover:border-white/30 transition-colors duration-300">
+                            Get in Touch
+                        </a>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="animate-fade-up delay-400 flex items-center gap-8 pt-4">
+                        <div>
+                            <div class="text-2xl font-medium">7.8</div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wider">CGPA</div>
+                        </div>
+                        <div class="w-px h-10 bg-white/10"></div>
+                        <div>
+                            <div class="text-2xl font-medium">2+</div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wider">Projects</div>
+                        </div>
+                        <div class="w-px h-10 bg-white/10"></div>
+                        <div>
+                            <div class="text-2xl font-medium">4</div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wider">Certifications</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Profile Visual -->
+                <div class="hidden lg:flex justify-center items-center relative animate-fade-up delay-300">
+                    <div class="relative">
+                        <!-- Background circle -->
+                        <div class="w-80 h-80 rounded-full bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/5 flex items-center justify-center">
+                            <div class="w-64 h-64 rounded-full bg-gradient-to-br from-blue-500/10 to-fuchsia-500/10 border border-white/5 flex items-center justify-center">
+                                <div class="w-48 h-48 rounded-full bg-[#0a0a0a] border border-white/10 flex items-center justify-center overflow-hidden">
+                                    <div class="text-center">
+                                        <div class="text-5xl font-bold gradient-text">MP</div>
+                                        <div class="text-[10px] text-neutral-500 uppercase tracking-widest mt-2">Data Scientist</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating skill badges -->
+                        <div class="absolute -top-4 -right-4 px-3 py-1.5 rounded-full bg-[#0a0a0a] border border-blue-500/30 text-xs text-blue-400 font-medium animate-float">
+                            Python
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 px-3 py-1.5 rounded-full bg-[#0a0a0a] border border-purple-500/30 text-xs text-purple-400 font-medium animate-float-delay">
+                            ML/AI
+                        </div>
+                        <div class="absolute top-1/2 -right-12 px-3 py-1.5 rounded-full bg-[#0a0a0a] border border-fuchsia-500/30 text-xs text-fuchsia-400 font-medium animate-float">
+                            Pandas
+                        </div>
+                        <div class="absolute top-1/2 -left-12 px-3 py-1.5 rounded-full bg-[#0a0a0a] border border-green-500/30 text-xs text-green-400 font-medium animate-float-delay">
+                            AWS
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== MARQUEE ========== -->
+    <section class="py-12 border-y border-white/5 overflow-hidden">
+        <div class="animate-marquee flex items-center gap-12 whitespace-nowrap">
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>Python</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>NumPy</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Pandas</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>Matplotlib</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Seaborn</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Scikit-learn</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>MySQL</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>MongoDB</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Flask</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>AWS</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>Python</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>NumPy</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Pandas</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>Matplotlib</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Seaborn</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Scikit-learn</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>MySQL</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>MongoDB</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-500"></span>Flask</span>
+            <span class="text-neutral-600 text-sm font-medium uppercase tracking-widest flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>AWS</span>
+        </div>
+    </section>
+
+
+    <!-- ========== ABOUT ME ========== -->
+    <section id="about" class="py-24 md:py-32 relative">
+        <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-px bg-blue-500"></div>
+                    <span class="text-[10px] font-medium text-neutral-500 uppercase tracking-widest">About Me</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-medium tracking-tight mb-16">
+                    Get to know <span class="gradient-text">who I am</span>
+                </h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <!-- Left: Text -->
+                <div class="reveal space-y-6">
+                    <p class="text-base font-light text-neutral-400 leading-relaxed">
+                        Hi, my name is <span class="text-white font-medium">Man Patel</span>. I am currently pursuing a <span class="text-white font-medium">B.Tech in Computer Science</span> from Karnavati University, United Institute of Technology (UIT), with a present CGPA of <span class="text-white font-medium">7.8</span>.
+                    </p>
+                    <p class="text-base font-light text-neutral-400 leading-relaxed">
+                        I am a motivated individual with strong data analytics and Python skills, experienced in working with <span class="text-blue-400">NumPy</span>, <span class="text-purple-400">Pandas</span>, <span class="text-fuchsia-400">Matplotlib</span>, and <span class="text-blue-400">Scikit-learn</span> for data analysis and visualization. I thrive on applying data-driven solutions to real-world problems.
+                    </p>
+                    <p class="text-base font-light text-neutral-400 leading-relaxed">
+                        My journey in data science has led me to explore <span class="text-white font-medium">time series analysis</span>, <span class="text-white font-medium">regression modeling</span>, and <span class="text-white font-medium">machine learning</span> — with hands-on projects that bridge theory and practice. I'm always eager to learn, collaborate, and grow.
+                    </p>
+
+                    <!-- Info Grid -->
+                    <div class="grid grid-cols-2 gap-4 pt-6">
+                        <div class="p-4 rounded-2xl border border-white/5 bg-neutral-900/30">
+                            <div class="text-xs text-neutral-500 uppercase tracking-wider mb-1">Name</div>
+                            <div class="text-sm font-medium">Man Patel</div>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-white/5 bg-neutral-900/30">
+                            <div class="text-xs text-neutral-500 uppercase tracking-wider mb-1">Email</div>
+                            <div class="text-sm font-medium text-blue-400">man23122005@gmail.com</div>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-white/5 bg-neutral-900/30">
+                            <div class="text-xs text-neutral-500 uppercase tracking-wider mb-1">University</div>
+                            <div class="text-sm font-medium">Karnavati University</div>
+                        </div>
+                        <div class="p-4 rounded-2xl border border-white/5 bg-neutral-900/30">
+                            <div class="text-xs text-neutral-500 uppercase tracking-wider mb-1">Duration</div>
+                            <div class="text-sm font-medium">2023 – 2027</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Education Card -->
+                <div class="reveal delay-200">
+                    <div class="rounded-[32px] border border-white/10 bg-neutral-900/50 p-8 space-y-6 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none"></div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                                <i data-lucide="graduation-cap" class="w-6 h-6 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium">Education</h3>
+                                <p class="text-xs text-neutral-500">Bachelor of Technology</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="p-5 rounded-2xl bg-[#050505] border border-white/5">
+                                <div class="flex items-start justify-between mb-3">
+                                    <div>
+                                        <h4 class="text-sm font-medium">B.Tech in Computer Science</h4>
+                                        <p class="text-xs text-neutral-500 mt-1">Karnavati University, UIT</p>
+                                    </div>
+                                    <span class="text-[10px] font-medium text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full">2023-2027</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs text-neutral-500">CGPA:</span>
+                                    <span class="text-sm font-medium text-white">7.8</span>
+                                    <div class="flex-1 h-1.5 rounded-full bg-white/5 ml-2 overflow-hidden">
+                                        <div class="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 grow-bar" style="--w: 78%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Soft Skills -->
+                        <div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wider mb-3">Soft Skills</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 rounded-full border border-white/5 bg-white/5 text-xs text-neutral-300">Teamwork</span>
+                                <span class="px-3 py-1.5 rounded-full border border-white/5 bg-white/5 text-xs text-neutral-300">Problem-Solving</span>
+                                <span class="px-3 py-1.5 rounded-full border border-white/5 bg-white/5 text-xs text-neutral-300">Self-Motivated</span>
+                                <span class="px-3 py-1.5 rounded-full border border-white/5 bg-white/5 text-xs text-neutral-300">Quick Learner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== SKILLS ========== -->
+    <section id="skills" class="py-24 md:py-32 relative">
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-px bg-purple-500"></div>
+                    <span class="text-[10px] font-medium text-neutral-500 uppercase tracking-widest">Skills & Tools</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-medium tracking-tight mb-16">
+                    My technical <span class="gradient-text">toolkit</span>
+                </h2>
+            </div>
+
+            <!-- Skill Categories -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Programming -->
+                <div class="reveal skill-card p-6 rounded-2xl border border-white/5 bg-neutral-900/30 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                            <i data-lucide="code-2" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <h3 class="text-sm font-medium">Programming</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-xs text-neutral-400">Python</span><span class="text-xs text-blue-400">Advanced</span></div>
+                            <div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full rounded-full bg-blue-500 grow-bar" style="--w: 90%;"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-xs text-neutral-400">SQL</span><span class="text-xs text-blue-400">Intermediate</span></div>
+                            <div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full rounded-full bg-blue-500 grow-bar" style="--w: 70%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Science Libraries -->
+                <div class="reveal delay-100 skill-card p-6 rounded-2xl border border-white/5 bg-neutral-900/30 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5 text-purple-400"></i>
+                        </div>
+                        <h3 class="text-sm font-medium">Data Science Libraries</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 text-xs text-purple-300">NumPy</span>
+                        <span class="px-3 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 text-xs text-purple-300">Pandas</span>
+                        <span class="px-3 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 text-xs text-purple-300">Matplotlib</span>
+                        <span class="px-3 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 text-xs text-purple-300">Seaborn</span>
+                        <span class="px-3 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/5 text-xs text-purple-300">Scikit-learn</span>
+                    </div>
+                </div>
+
+                <!-- Databases -->
+                <div class="reveal delay-200 skill-card p-6 rounded-2xl border border-white/5 bg-neutral-900/30 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-fuchsia-500/10 flex items-center justify-center">
+                            <i data-lucide="database" class="w-5 h-5 text-fuchsia-400"></i>
+                        </div>
+                        <h3 class="text-sm font-medium">Databases</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-xs text-neutral-400">MySQL</span><span class="text-xs text-fuchsia-400">Intermediate</span></div>
+                            <div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full rounded-full bg-fuchsia-500 grow-bar" style="--w: 72%;"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-xs text-neutral-400">MongoDB</span><span class="text-xs text-fuchsia-400">Beginner</span></div>
+                            <div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full rounded-full bg-fuchsia-500 grow-bar" style="--w: 45%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Framework -->
+                <div class="reveal delay-300 skill-card p-6 rounded-2xl border border-white/5 bg-neutral-900/30 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
+                            <i data-lucide="globe" class="w-5 h-5 text-green-400"></i>
+                        </div>
+                        <h3 class="text-sm font-medium">Web Framework</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-full border border-green-500/20 bg-green-500/5 text-xs text-green-300">Flask</span>
+                    </div>
+                </div>
+
+                <!-- Cloud -->
+                <div class="reveal delay-400 skill-card p-6 rounded-2xl border border-white/5 bg-neutral-900/30 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
+                            <i data-lucide="cloud" class="w-5 h-5 text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-sm font-medium">Cloud</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-full border border-yellow-500/20 bg-yellow-500/5 text-xs text-yellow-300">Amazon Web Services</span>
+                    </div>
+                </div>
+
+                <!-- ML Concepts -->
+                <div class="reveal delay-500 skill-card p-6 rounded-2xl border border-white/5 bg-neutral-900/30 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                            <i data-lucide="brain" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <h3 class="text-sm font-medium">ML Concepts</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/5 text-xs text-blue-300">Regression</span>
+                        <span class="px-3 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/5 text-xs text-blue-300">Time Series</span>
+                        <span class="px-3 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/5 text-xs text-blue-300">Clustering</span>
+                        <span class="px-3 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/5 text-xs text-blue-300">Decision Trees</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== PROJECTS ========== -->
+    <section id="projects" class="py-24 md:py-32 relative">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-px bg-fuchsia-500"></div>
+                    <span class="text-[10px] font-medium text-neutral-500 uppercase tracking-widest">Projects</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-medium tracking-tight mb-16">
+                    Featured <span class="gradient-text">work</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Project 1: Stock Price Prediction -->
+                <div class="reveal project-card group rounded-[32px] border border-white/10 bg-neutral-900/30 overflow-hidden relative">
+                    <!-- Image -->
+                    <div class="h-56 relative overflow-hidden">
+                        <img src="https://picsum.photos/seed/stockmarket-chart/800/500.jpg" alt="Stock Price Prediction" class="card-image w-full h-full object-cover opacity-40 transition-all duration-700">
+                        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent opacity-80 transition-opacity duration-500"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-medium text-blue-400 uppercase tracking-wider">Machine Learning</span>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-8 space-y-4 relative">
+                        <div class="card-border absolute inset-0 rounded-[32px] border border-blue-500/20 opacity-0 transition-opacity duration-500 pointer-events-none"></div>
+                        <h3 class="text-xl font-medium">Stock Price Prediction</h3>
+                        <p class="text-sm font-light text-neutral-400 leading-relaxed">
+                            Predict future stock prices using historical stock data with time series analysis and machine learning models.
+                        </p>
+
+                        <!-- Tools -->
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] text-neutral-400">Python</span>
+                            <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] text-neutral-400">Pandas</span>
+                            <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] text-neutral-400">NumPy</span>
+                            <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] text-neutral-400">Matplotlib</span>
+                            <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] text-neutral-400">Scikit-learn</span>
+                            <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] text-neutral-400">Flask</span>
+                        </div>
+
+                        <!-- Concepts -->
+                        <div class="pt-2">
+                            <div class="text-[10px] text-neutral-500 uppercase tracking-wider mb-2">Key Concepts</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-full bg-blue-500/5 border border-blue-500/10 text-[10px] text-blue-300/70">Time Series Analysis</span>
+                                <span class="px-2.5 py-1 rounded-full bg-blue-500/5 border border-blue-500/10 text-[10px] text-blue-300/70">ML Models</span>
+                            </div>
+                        </div>
+
+                        <a href="https://github.com/ManPatel" target="_blank" class="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors group/link pt-2">
+                            View on GitHub
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: House Price Prediction -->
+                <div class="reveal delay-200 project-card group rounded-[32px] border border-white/10 bg-neutral-900/30 overflow-hidden relative">
+                    <!-- Image -->
+                    <div class="h-56 relative overflow-hidden">
+                        <img src="https://picsum.photos/seed/modern-house-architecture/800/500.jpg" alt="House Price Prediction" class="card-image w-full h-full object-cover opacity-40 transition-all duration-700">
+                        <div class="card-overlay absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent opacity-80 transition-opacity duration-500"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[10px] font-medium text-purple-400 uppercase tracking-wider">Regression Analysis</span>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-8 space-y-4 relative">
+                        <div class="card-border absolute inset-0 rounded-[32px] border border-purple-500/20 opacity-0 transition-opacity duration-500 pointer-events-none"></div>
+                        <h3 class="text-xl font-medium">House Price Prediction</h3>
+                        <p class="text-sm font-light text-neutral-400 leading-relaxed">
+                            Build a model to predict house prices based on features like area, location, number of rooms, and more.
+                        </p>
+
+                        <!-- Skills Used -->
+                        <div class="pt-2">
+                            <div class="text-[10px] text-neutral-500 uppercase tracking-wider mb-2">Skills Used</div>
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-purple-400"></i>
+                                    <span class="text-xs text-neutral-300">Data Preprocessing</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-purple-400"></i>
+                                    <span class="text-xs text-neutral-300">Feature Selection</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-purple-400"></i>
+                                    <span class="text-xs text-neutral-300">Linear Regression & Decision Tree</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-purple-400"></i>
+                                    <span class="text-xs text-neutral-300">Data Visualization</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://github.com/ManPatel" target="_blank" class="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors group/link pt-2">
+                            View on GitHub
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== CERTIFICATIONS ========== -->
+    <section id="certifications" class="py-24 md:py-32 relative">
+        <div class="absolute top-0 right-1/4 w-[300px] h-[300px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-px bg-yellow-500"></div>
+                    <span class="text-[10px] font-medium text-neutral-500 uppercase tracking-widest">Certifications</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-medium tracking-tight mb-16">
+                    Courses & <span class="gradient-text">certificates</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <!-- AWS -->
+                <div class="reveal cert-card p-6 rounded-2xl border border-white/10 bg-neutral-900/30 flex gap-5 items-start">
+                    <div class="w-14 h-14 shrink-0 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center">
+                        <i data-lucide="award" class="w-6 h-6 text-yellow-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium mb-1">AWS Academy Graduate</h3>
+                        <p class="text-xs text-neutral-500 mb-2">Cloud Foundations - Training Badge</p>
+                        <p class="text-xs text-neutral-400">Amazon Web Services (AWS)</p>
+                    </div>
+                </div>
+
+                <!-- ML & AI -->
+                <div class="reveal delay-100 cert-card p-6 rounded-2xl border border-white/10 bg-neutral-900/30 flex gap-5 items-start">
+                    <div class="w-14 h-14 shrink-0 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-6 h-6 text-blue-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium mb-1">Machine Learning and AI Foundations</h3>
+                        <p class="text-xs text-neutral-500 mb-2">Clustering and Association</p>
+                        <p class="text-xs text-neutral-400">LinkedIn Learning</p>
+                    </div>
+                </div>
+
+                <!-- MySQL -->
+                <div class="reveal delay-200 cert-card p-6 rounded-2xl border border-white/10 bg-neutral-900/30 flex gap-5 items-start">
+                    <div class="w-14 h-14 shrink-0 rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center">
+                        <i data-lucide="database" class="w-6 h-6 text-fuchsia-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium mb-1">MySQL Essential Training</h3>
+                        <p class="text-xs text-neutral-500 mb-2">Database Management Fundamentals</p>
+                        <p class="text-xs text-neutral-400">LinkedIn Learning</p>
+                    </div>
+                </div>
+
+                <!-- B.Tech -->
+                <div class="reveal delay-300 cert-card p-6 rounded-2xl border border-white/10 bg-neutral-900/30 flex gap-5 items-start">
+                    <div class="w-14 h-14 shrink-0 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                        <i data-lucide="graduation-cap" class="w-6 h-6 text-purple-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium mb-1">B.Tech Computer Science</h3>
+                        <p class="text-xs text-neutral-500 mb-2">Karnavati University, UIT</p>
+                        <p class="text-xs text-neutral-400">Expected Graduation: 2027</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== CONTACT / CV SECTION ========== -->
+    <section id="contact" class="py-24 md:py-32 relative">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-px bg-blue-500"></div>
+                    <span class="text-[10px] font-medium text-neutral-500 uppercase tracking-widest">Contact</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-medium tracking-tight mb-4">
+                    Let's <span class="gradient-text">connect</span>
+                </h2>
+                <p class="text-base font-light text-neutral-400 leading-relaxed max-w-lg mb-16">
+                    Interested in collaborating or have an opportunity? Feel free to reach out. I'm always open to discussing data science, machine learning, or new projects.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+
+                <!-- Left: Links & CV -->
+                <div class="reveal space-y-6">
+                    <!-- Download CV -->
+                    <div class="p-6 rounded-[24px] border border-white/10 bg-neutral-900/30 flex items-center gap-5 group hover:border-blue-500/30 transition-all duration-500 cursor-pointer" onclick="showToast('CV download will be available once you upload your CV file.')">
+                        <div class="w-14 h-14 shrink-0 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
+                            <i data-lucide="file-down" class="w-6 h-6 text-blue-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium">Download My CV</h3>
+                            <p class="text-xs text-neutral-500">Resume_ManPatel.pdf</p>
+                        </div>
+                        <i data-lucide="download" class="w-5 h-5 text-neutral-500 group-hover:text-blue-400 transition-colors"></i>
+                    </div>
+
+                    <!-- LinkedIn -->
+                    <a href="https://linkedin.com/in/ManPatel" target="_blank" class="block p-6 rounded-[24px] border border-white/10 bg-neutral-900/30 flex items-center gap-5 group hover:border-blue-500/30 transition-all duration-500">
+                        <div class="w-14 h-14 shrink-0 rounded-2xl bg-blue-600/10 border border-blue-600/20 flex items-center justify-center group-hover:bg-blue-600/20 transition-colors">
+                            <svg class="w-6 h-6 text-blue-400" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium">LinkedIn Profile</h3>
+                            <p class="text-xs text-neutral-500">linkedin.com/in/ManPatel</p>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-neutral-500 group-hover:text-blue-400 transition-colors"></i>
+                    </a>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/ManPatel" target="_blank" class="block p-6 rounded-[24px] border border-white/10 bg-neutral-900/30 flex items-center gap-5 group hover:border-purple-500/30 transition-all duration-500">
+                        <div class="w-14 h-14 shrink-0 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors">
+                            <svg class="w-6 h-6 text-purple-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium">GitHub Repository</h3>
+                            <p class="text-xs text-neutral-500">github.com/ManPatel</p>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-neutral-500 group-hover:text-purple-400 transition-colors"></i>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:man23122005@gmail.com" class="block p-6 rounded-[24px] border border-white/10 bg-neutral-900/30 flex items-center gap-5 group hover:border-fuchsia-500/30 transition-all duration-500">
+                        <div class="w-14 h-14 shrink-0 rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center group-hover:bg-fuchsia-500/20 transition-colors">
+                            <i data-lucide="mail" class="w-6 h-6 text-fuchsia-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium">Email Me</h3>
+                            <p class="text-xs text-neutral-500">man23122005@gmail.com</p>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-neutral-500 group-hover:text-fuchsia-400 transition-colors"></i>
+                    </a>
+                </div>
+
+                <!-- Right: Contact Form -->
+                <div class="reveal delay-200">
+                    <form id="contact-form" class="p-8 rounded-[32px] border border-white/10 bg-neutral-900/30 space-y-6">
+                        <div>
+                            <label class="text-xs text-neutral-500 uppercase tracking-wider mb-2 block">Your Name</label>
+                            <input type="text" placeholder="John Doe" class="w-full h-12 px-4 rounded-xl bg-[#050505] border border-white/10 text-sm text-white placeholder:text-neutral-600 focus:outline-none focus:border-blue-500/50 transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-xs text-neutral-500 uppercase tracking-wider mb-2 block">Your Email</label>
+                            <input type="email" placeholder="john@example.com" class="w-full h-12 px-4 rounded-xl bg-[#050505] border border-white/10 text-sm text-white placeholder:text-neutral-600 focus:outline-none focus:border-blue-500/50 transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-xs text-neutral-500 uppercase tracking-wider mb-2 block">Message</label>
+                            <textarea rows="5" placeholder="Tell me about your project or opportunity..." class="w-full px-4 py-3 rounded-xl bg-[#050505] border border-white/10 text-sm text-white placeholder:text-neutral-600 focus:outline-none focus:border-blue-500/50 transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full h-12 rounded-xl bg-white text-black text-sm font-medium hover:bg-neutral-200 transition-colors duration-300 flex items-center justify-center gap-2">
+                            Send Message
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="border-t border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <span class="text-white font-bold text-xs">MP</span>
+                    </div>
+                    <span class="text-sm text-neutral-500">© 2025 Man Patel. All rights reserved.</span>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex items-center gap-4">
+                    <a href="https://linkedin.com/in/ManPatel" target="_blank" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-neutral-500 hover:text-white hover:border-white/30 transition-all duration-300">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="https://github.com/ManPatel" target="_blank" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-neutral-500 hover:text-white hover:border-white/30 transition-all duration-300">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="mailto:man23122005@gmail.com" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-neutral-500 hover:text-white hover:border-white/30 transition-all duration-300">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                    </a>
+                </div>
+
+                <!-- Back to top -->
+                <a href="#hero" class="text-xs text-neutral-500 hover:text-white transition-colors flex items-center gap-2">
+                    Back to top
+                    <i data-lucide="arrow-up" class="w-3 h-3"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ========== TOAST NOTIFICATION ========== -->
+    <div id="toast" class="toast fixed bottom-6 right-6 z-50 px-5 py-3 rounded-xl bg-neutral-900 border border-white/10 text-sm text-neutral-300 flex items-center gap-3 shadow-2xl">
+        <i data-lucide="info" class="w-4 h-4 text-blue-400 shrink-0"></i>
+        <span id="toast-message">Message</span>
+    </div>
+
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // ---- Mobile Menu ----
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let menuOpen = false;
+
+        mobileToggle.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+        });
+
+        function closeMobileMenu() {
+            menuOpen = false;
+            mobileMenu.classList.remove('open');
+        }
+
+        // ---- Toast Notification ----
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // ---- Contact Form ----
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showToast('Thank you! Your message has been received.');
+            e.target.reset();
+        });
+
+        // ---- Scroll Reveal ----
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ---- Navbar background on scroll ----
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.borderBottomColor = 'rgba(255,255,255,0.08)';
+            } else {
+                nav.style.borderBottomColor = 'rgba(255,255,255,0.03)';
+            }
+        });
+
+        // ---- Active nav link highlight ----
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-white');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-white');
+                }
+            });
+        });
+
+        // ---- Skill bar animation trigger ----
+        const skillBars = document.querySelectorAll('.grow-bar');
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.3 });
+
+        skillBars.forEach(bar => {
+            bar.style.animationPlayState = 'paused';
+            barObserver.observe(bar);
+        });
+    </script>
+
+</body>
+</html>
